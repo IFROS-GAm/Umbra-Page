@@ -1145,12 +1145,87 @@ body::-webkit-scrollbar-thumb:hover {
   .timeline-stage {
     min-height: auto;
     align-items: flex-start;
-    padding-top: 8rem;
-    padding-bottom: 5rem;
+    padding-top: 3.25rem;
+    padding-bottom: 3rem;
+  }
+
+  .timeline-shell {
+    max-width: 1320px;
+  }
+
+  .timeline-desktop-grid {
+    gap: 1.5rem;
+    grid-template-columns: minmax(0, 0.84fr) minmax(340px, 0.92fr);
+  }
+
+  .timeline-title {
+    margin-top: 1rem;
+    font-size: clamp(2.6rem, 4vw, 4.3rem);
+  }
+
+  .timeline-description {
+    margin-top: 1rem;
+    max-width: 31rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .timeline-active-head {
+    margin-top: 1.25rem;
+    gap: 0.9rem;
+  }
+
+  .timeline-active-marker {
+    height: 3.25rem;
+    width: 3.25rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .timeline-active-milestone {
+    margin-top: 0.5rem;
+    max-width: 10ch;
+    font-size: clamp(2.15rem, 3.7vw, 3.5rem);
+  }
+
+  .timeline-progress {
+    margin-top: 1rem;
+    width: min(440px, 72vw);
+  }
+
+  .timeline-summary {
+    margin-top: 1rem;
+    min-height: 4.75rem;
+    max-width: 31rem;
+  }
+
+  .timeline-summary-copy {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .timeline-step-grid {
+    margin-top: 1rem;
+    gap: 0.65rem;
+  }
+
+  .timeline-step-chip {
+    padding: 0.75rem 0.9rem;
+    border-radius: 1rem;
+  }
+
+  .timeline-step-chip .font-circular-web {
+    margin-top: 0.4rem;
+    font-size: 0.78rem;
+  }
+
+  .timeline-visual {
+    align-items: flex-start;
   }
 
   .timeline-media-frame {
-    min-height: 28rem;
+    min-height: 23.5rem;
+    padding: 0.9rem;
   }
 
   .hero-heading {

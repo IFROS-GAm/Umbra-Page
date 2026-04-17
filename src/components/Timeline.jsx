@@ -52,7 +52,7 @@ const Timeline = ({ content }) => {
 
       mm.add("(min-width: 1024px) and (min-height: 861px)", () => {
         const trigger = createTimelineTrigger({
-          start: "top top+=160",
+          start: "top top+=72",
           end: () =>
             `+=${Math.max(window.innerHeight * (steps.length + 0.75), 2600)}`,
           pin: pinRef.current,
@@ -67,9 +67,12 @@ const Timeline = ({ content }) => {
 
       mm.add("(min-width: 1024px) and (max-height: 860px)", () => {
         const trigger = createTimelineTrigger({
-          start: "top top+=120",
-          end: "bottom bottom-=48",
-          scrub: 0.28,
+          start: "top top+=18",
+          end: () =>
+            `+=${Math.max(window.innerHeight * (steps.length + 0.55), 2100)}`,
+          pin: pinRef.current,
+          scrub: 0.26,
+          anticipatePin: 0,
         });
 
         return () => {
@@ -116,7 +119,7 @@ const Timeline = ({ content }) => {
         ref={pinRef}
         className="timeline-stage relative flex min-h-screen items-center overflow-hidden px-5 py-24 sm:px-10 lg:py-32"
       >
-        <div className="mx-auto w-full max-w-[1440px]">
+        <div className="timeline-shell mx-auto w-full max-w-[1440px]">
           <div className="lg:hidden">
             <div className="max-w-xl">
               <p className="font-general text-[11px] uppercase tracking-[0.28em] text-violet-300">
@@ -182,33 +185,33 @@ const Timeline = ({ content }) => {
             </div>
           </div>
 
-          <div className="hidden gap-10 lg:grid lg:grid-cols-[minmax(0,0.88fr)_minmax(420px,1fr)]">
-            <div ref={copyRef} className="flex flex-col justify-center">
+          <div className="timeline-desktop-grid hidden gap-10 lg:grid lg:grid-cols-[minmax(0,0.88fr)_minmax(420px,1fr)]">
+            <div ref={copyRef} className="timeline-copy flex flex-col justify-center">
               <p className="font-general text-xs uppercase tracking-[0.28em] text-violet-300">
                 {content.kicker}
               </p>
-              <h2 className="special-font mt-6 text-4xl font-zentry uppercase leading-[0.9] text-[#dfdff2] md:text-6xl">
+              <h2 className="timeline-title special-font mt-6 text-4xl font-zentry uppercase leading-[0.9] text-[#dfdff2] md:text-6xl">
                 {content.title}
               </h2>
-              <p className="mt-6 max-w-xl font-circular-web text-base leading-7 text-white/60 md:text-lg">
+              <p className="timeline-description mt-6 max-w-xl font-circular-web text-base leading-7 text-white/60 md:text-lg">
                 {content.description}
               </p>
 
-              <div className="mt-10 flex flex-wrap items-start gap-4">
-                <div className="flex size-16 items-center justify-center rounded-[1.4rem] border border-violet-300/25 bg-violet-300/10 font-general text-sm uppercase tracking-[0.22em] text-violet-100 shadow-[0_16px_40px_rgba(168,85,247,0.16)]">
+              <div className="timeline-active-head mt-10 flex flex-wrap items-start gap-4">
+                <div className="timeline-active-marker flex size-16 items-center justify-center rounded-[1.4rem] border border-violet-300/25 bg-violet-300/10 font-general text-sm uppercase tracking-[0.22em] text-violet-100 shadow-[0_16px_40px_rgba(168,85,247,0.16)]">
                   {activeMarker}
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="font-general text-[10px] uppercase tracking-[0.24em] text-violet-300">
                     {active.sublabel}
                   </div>
-                  <div className="special-font mt-3 max-w-2xl text-[clamp(2.7rem,5vw,4.8rem)] font-zentry uppercase leading-[0.92] text-[#f3f0ff]">
+                  <div className="timeline-active-milestone special-font mt-3 max-w-2xl text-[clamp(2.7rem,5vw,4.8rem)] font-zentry uppercase leading-[0.92] text-[#f3f0ff]">
                     {activeMilestone}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 w-[min(560px,84vw)] rounded-full bg-white/10">
+              <div className="timeline-progress mt-8 w-[min(560px,84vw)] rounded-full bg-white/10">
                 <div
                   className="relative h-[3px] rounded-full bg-gradient-to-r from-violet-300 via-[#dfdff2] to-sky-300"
                   style={{ width: `${Math.max(Math.round(progress * 100), 5)}%` }}
@@ -217,13 +220,13 @@ const Timeline = ({ content }) => {
                 </div>
               </div>
 
-              <div className="mt-8 flex min-h-28 max-w-xl flex-col gap-3">
-                <div className="font-circular-web text-lg leading-7 text-white/75">
+              <div className="timeline-summary mt-8 flex min-h-28 max-w-xl flex-col gap-3">
+                <div className="timeline-summary-copy font-circular-web text-lg leading-7 text-white/75">
                   {active.label}
                 </div>
               </div>
 
-              <div className="mt-8 grid gap-3 md:grid-cols-2">
+              <div className="timeline-step-grid mt-8 grid gap-3 md:grid-cols-2">
                 {steps.map((step, index) => {
                   const stepMarker = step.marker ?? String(index + 1).padStart(2, "0");
                   const stepMilestone = step.milestone ?? step.year;
@@ -231,7 +234,7 @@ const Timeline = ({ content }) => {
                   return (
                     <div
                       key={`${stepMarker}-${stepMilestone}`}
-                      className={`rounded-[1.25rem] border px-4 py-3 transition-all duration-200 ${
+                      className={`timeline-step-chip rounded-[1.25rem] border px-4 py-3 transition-all duration-200 ${
                         index === activeIndex
                           ? "border-violet-300/40 bg-violet-300/10 text-violet-100 shadow-[0_16px_40px_rgba(168,85,247,0.14)]"
                           : "border-white/10 bg-white/5 text-white/55"
@@ -249,7 +252,7 @@ const Timeline = ({ content }) => {
               </div>
             </div>
 
-            <div ref={imageRef} className="relative flex items-center justify-center">
+            <div ref={imageRef} className="timeline-visual relative flex items-center justify-center">
               <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(96,165,250,0.18),transparent_55%)] blur-3xl" />
               <div className="timeline-media-frame relative flex min-h-[26rem] w-full items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,30,0.94),rgba(7,7,18,0.98))] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.35)] md:min-h-[34rem] md:p-6">
                 <div className="absolute left-1/2 top-10 h-28 w-3/4 -translate-x-1/2 rounded-full bg-violet-300/15 blur-3xl" />
