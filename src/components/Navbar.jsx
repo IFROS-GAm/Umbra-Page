@@ -6,13 +6,14 @@ import { TiLocationArrow } from "react-icons/ti";
 
 import Button from "./Button";
 import { languages } from "../content/siteContent";
+import { mediaAsset } from "../utils/media";
 
 const isPageRouteHref = (href = "") => href.startsWith("/");
 const audioPlaylist = [
   "Clair De Lune - Claude Debussy.mp3",
   "Chopin Nocturne No. 20 in C-Sharp Minor, Op. Posth. (Rousseau Felt Piano Version) - Johannes Helmer Pedersen.mp3",
   "Sonata Claro De Luna - Ludwig van Beethoven.mp3",
-].map((fileName) => encodeURI(`/audio/${fileName}`));
+].map((fileName) => mediaAsset(`/audio/${fileName}`));
 
 const menuLabels = {
   es: {
@@ -213,7 +214,7 @@ const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
                 )}
                 aria-label="Umbra"
               >
-                <img src="/img/Logo.png" alt="Umbra" className="w-9" />
+                <img src={mediaAsset("/img/Logo.png")} alt="Umbra" className="w-9" />
               </a>
 
               <Button

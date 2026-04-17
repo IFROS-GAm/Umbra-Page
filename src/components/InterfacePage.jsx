@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Footer from "./Footer";
+import { mediaAsset } from "../utils/media";
 
 const interfacePageCopyByLocale = {
   es: {
@@ -150,7 +151,7 @@ const interfacePageCopyByLocale = {
 };
 
 const interfaceCapture = (fileName) =>
-  encodeURI(`/Seccion-interfaz/${fileName}`);
+  mediaAsset(`/Seccion-interfaz/${fileName}`);
 
 const interfaceAssets = {
   friends: interfaceCapture("Captura de pantalla 2026-04-16 005705.png"),
@@ -159,7 +160,7 @@ const interfaceAssets = {
   reactions: interfaceCapture("Captura de pantalla 2026-04-16 005902.png"),
   voice: interfaceCapture("Captura de pantalla 2026-04-16 005917.png"),
   sidebar: interfaceCapture("Captura de pantalla 2026-04-16 005922.png"),
-  umbraLogo: "/img/Logo.png",
+  umbraLogo: mediaAsset("/img/Logo.png"),
   createModal: interfaceCapture("Captura de pantalla 2026-04-16 010044.png"),
   serverCard: interfaceCapture("Captura de pantalla 2026-04-16 010056.png"),
   createHeader: interfaceCapture("Captura de pantalla 2026-04-16 010642.png"),

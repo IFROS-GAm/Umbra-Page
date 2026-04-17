@@ -18,6 +18,7 @@ import DownloadsPage from "./components/DownloadsPage";
 import TermsPage from "./components/TermsPage";
 import { siteContent } from "./content/siteContent";
 import { utilityPages } from "./content/utilityPages";
+import { handleInternalNavigation } from "./utils/navigation";
 
 const overviewFallbacks = {
   fr: {
@@ -236,6 +237,24 @@ const App = () => {
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return undefined;
+
+    const handleDocumentClick = (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const anchor = target.closest("a[href]");
+      if (!anchor) return;
+      if (anchor.target === "_blank" || anchor.hasAttribute("download")) return;
+
+      handleInternalNavigation(event, anchor.getAttribute("href") ?? "");
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
   }, []);
 
   useEffect(() => {

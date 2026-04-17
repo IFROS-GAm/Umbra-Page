@@ -1,42 +1,44 @@
+import { mediaAsset } from "../utils/media";
+
 const interfaceCapture = (fileName) =>
-  encodeURI(`/Seccion-interfaz/${fileName}`);
+  mediaAsset(`/Seccion-interfaz/${fileName}`);
 
 const interfaceInviteMedia = interfaceCapture(
   "Captura de pantalla 2026-04-16 010707.png"
 );
-const timelineCapture = (fileName) => encodeURI(`/TimeLine/${fileName}`);
-const umbraLogoMedia = "/img/Logo.png";
+const timelineCapture = (fileName) => mediaAsset(`/TimeLine/${fileName}`);
+const umbraLogoMedia = mediaAsset("/img/Logo.png");
 
 const heroSlides = [
-  "/videos/Hero-default.png",
-  "/videos/hero (4).png",
+  mediaAsset("/videos/Hero-default.png"),
+  mediaAsset("/videos/hero (4).png"),
 ];
 
 const heroShowcaseSlides = [
-  "/videos/hero (1).png",
-  "/videos/hero (2).png",
-  "/videos/hero (5).png",
-  "/videos/hero (6).png",
+  mediaAsset("/videos/hero (1).png"),
+  mediaAsset("/videos/hero (2).png"),
+  mediaAsset("/videos/hero (5).png"),
+  mediaAsset("/videos/hero (6).png"),
 ];
 
 const featureMedia = {
-  primary: "/img/feature-0.png",
-  servers: "/videos/feature-1.mp4",
-  channels: "/videos/feature-2.mp4",
-  dms: "/videos/feature-3.mp4",
-  desktop: "/videos/feature-4.png",
+  primary: mediaAsset("/img/feature-0.png"),
+  servers: mediaAsset("/img/XD.png"),
+  channels: mediaAsset("/img/about.png"),
+  dms: mediaAsset("/videos/feature-3.mp4"),
+  desktop: mediaAsset("/videos/feature-4.png"),
 };
 
 const capabilityMedia = {
-  servers: "/img/XD.png",
-  channels: "/videos/feature-3.mp4",
+  servers: mediaAsset("/img/XD.png"),
+  channels: mediaAsset("/videos/feature-3.mp4"),
   invites: interfaceInviteMedia,
 };
-const capabilityFragmentMedia = "/videos/ENCIMA.png";
+const capabilityFragmentMedia = mediaAsset("/videos/ENCIMA.png");
 
 const experienceGallery = [
-  "/videos/hero (1).png",
-  "/videos/hero (2).png",
+  mediaAsset("/videos/hero (1).png"),
+  mediaAsset("/videos/hero (2).png"),
 ];
 
 const timelineMedia = [
@@ -47,8 +49,8 @@ const timelineMedia = [
   timelineCapture("5.png"),
 ];
 
-const storyImage = "/videos/hero (2).png";
-const footerImage = "/videos/hero (1).png";
+const storyImage = mediaAsset("/videos/hero (2).png");
+const footerImage = mediaAsset("/videos/hero (1).png");
 
 export const languages = [
   { code: "es", label: "ES" },
@@ -142,7 +144,7 @@ export const siteContent = {
         "Supabase para auth y datos",
         "Electron para desktop",
       ],
-      image: "/img/about.png",
+      image: mediaAsset("/img/about.png"),
       imageAlt: "Captura principal de la interfaz de Umbra",
     },
     showcase: {
@@ -200,14 +202,14 @@ export const siteContent = {
           description:
             "Crea tus espacios, define roles y organiza la conversacion como quieras, sin depender de moderacion ajena.",
           media: featureMedia.servers,
-          mediaType: "video",
+          mediaType: "image",
         },
         {
           title: "Canales claros",
           description:
             "Texto, anuncios o zonas privadas. Cada canal mantiene su orden y su propio contexto.",
           media: featureMedia.channels,
-          mediaType: "video",
+          mediaType: "image",
         },
         {
           title: "DMs y actividad",
@@ -519,7 +521,7 @@ export const siteContent = {
         "Supabase for auth and data",
         "Electron for desktop",
       ],
-      image: "/img/about.png",
+      image: mediaAsset("/img/about.png"),
       imageAlt: "Main Umbra interface screenshot",
     },
     showcase: {
@@ -577,14 +579,14 @@ export const siteContent = {
           description:
             "Build your own spaces, define roles and shape the conversation without outside moderation deciding for you.",
           media: featureMedia.servers,
-          mediaType: "video",
+          mediaType: "image",
         },
         {
           title: "Clear channels",
           description:
             "Text rooms, announcements or private areas. Every channel keeps its purpose and context intact.",
           media: featureMedia.channels,
-          mediaType: "video",
+          mediaType: "image",
         },
         {
           title: "DMs and presence",
@@ -862,7 +864,7 @@ export const siteContent = {
         "Supabase pour l'auth et les données",
         "Electron pour desktop",
       ],
-      image: "/img/about.png",
+      image: mediaAsset("/img/about.png"),
       imageAlt: "Capture principale de l'interface Umbra",
     },
     showcase: {
@@ -920,14 +922,14 @@ export const siteContent = {
           description:
             "Crée tes espaces, définis les rôles et organise les échanges sans dépendre d'une modération extérieure.",
           media: featureMedia.servers,
-          mediaType: "video",
+          mediaType: "image",
         },
         {
           title: "Canaux lisibles",
           description:
             "Texte, annonces ou zones privées. Chaque canal garde son but et son contexte.",
           media: featureMedia.channels,
-          mediaType: "video",
+          mediaType: "image",
         },
         {
           title: "DMs et présence",
