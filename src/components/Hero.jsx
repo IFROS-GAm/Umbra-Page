@@ -39,13 +39,13 @@ const Hero = ({ content }) => {
   });
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden">
+    <div className="hero-stage relative h-dvh w-full overflow-hidden">
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-full overflow-hidden rounded-lg bg-blue-75"
+        className="hero-stage-frame relative z-10 h-dvh w-full overflow-hidden rounded-lg bg-blue-75"
       >
         <div>
-          <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
+          <div className="hero-preview-card mask-clip-path absolute-center absolute z-50 cursor-pointer overflow-hidden rounded-lg">
             <VideoPreview>
               <div
                 onClick={() =>
@@ -56,7 +56,7 @@ const Hero = ({ content }) => {
                 <img
                   src={nextSlide.src}
                   alt={nextSlide.alt}
-                  className="size-64 origin-center scale-150 object-cover object-center"
+                  className="hero-preview-image origin-center scale-150 object-cover object-center"
                 />
               </div>
             </VideoPreview>
@@ -74,24 +74,24 @@ const Hero = ({ content }) => {
           <div className="hero-fractal-shard hero-fractal-shard-3" />
         </div>
 
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-[#dfdff2]">
+        <h1 className="special-font hero-heading hero-corner-mark absolute bottom-5 right-5 z-40 text-[#dfdff2]">
           U<b>M</b>BRA
         </h1>
 
         <div className="absolute left-0 top-0 z-40 size-full overflow-hidden" id="inicio">
-          <div className="relative size-full px-5 pb-28 pt-28 sm:px-10 sm:pb-32 sm:pt-32">
+          <div className="hero-content-shell relative size-full px-5 pb-28 pt-28 sm:px-10 sm:pb-32 sm:pt-32">
             <div className="max-w-2xl">
               <p className="font-general text-xs uppercase tracking-[0.35em] text-violet-300">
                 {content.eyebrow}
               </p>
 
-              <h1 className="special-font hero-heading mt-5 text-[#dfdff2]">
+              <h1 className="special-font hero-heading hero-brand-mark mt-5 text-[#dfdff2]">
                 u<b>m</b>bra
               </h1>
             </div>
 
-            <div className="absolute bottom-28 left-5 z-50 max-w-[19rem] sm:bottom-32 sm:left-10 sm:max-w-[24rem] md:max-w-[30rem]">
-              <h2 className="special-font font-zentry text-[clamp(2.9rem,7vw,5.4rem)] uppercase leading-[0.82] text-[#dfdff2]">
+            <div className="hero-copy-block absolute bottom-28 left-5 z-50 max-w-[19rem] sm:bottom-32 sm:left-10 sm:max-w-[24rem] md:max-w-[30rem]">
+              <h2 className="hero-message special-font font-zentry uppercase leading-[0.82] text-[#dfdff2]">
                 {content.subtitle ?? content.headlinePrimary}
                 <br />
                 {content.tagline ?? content.headlineSecondary}
@@ -102,7 +102,7 @@ const Hero = ({ content }) => {
               </p>
             </div>
 
-            <div className="absolute inset-x-4 bottom-5 z-50 flex justify-center sm:inset-x-10 sm:bottom-8">
+            <div className="hero-actions absolute inset-x-4 bottom-5 z-50 flex justify-center sm:inset-x-10 sm:bottom-8">
               <div className="hero-cta-shell flex w-full max-w-[42rem] flex-wrap items-center justify-center gap-3 px-4 py-3">
                 <Button
                   id="primary-cta"
@@ -133,7 +133,7 @@ const Hero = ({ content }) => {
         </div>
       </div>
 
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-violet-300">
+      <h1 className="special-font hero-heading hero-corner-mark absolute bottom-5 right-5 text-violet-300">
         U<b>M</b>BRA
       </h1>
     </div>

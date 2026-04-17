@@ -42,17 +42,34 @@ const Timeline = ({ content }) => {
 
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 1024px)", () => {
-        const trigger = ScrollTrigger.create({
+      const createTimelineTrigger = (config) =>
+        ScrollTrigger.create({
           trigger: sectionRef.current,
-          start: "top top+=140",
+          invalidateOnRefresh: true,
+          onUpdate: (self) => updateState(self.progress),
+          ...config,
+        });
+
+      mm.add("(min-width: 1024px) and (min-height: 861px)", () => {
+        const trigger = createTimelineTrigger({
+          start: "top top+=160",
           end: () =>
             `+=${Math.max(window.innerHeight * (steps.length + 0.75), 2600)}`,
           pin: pinRef.current,
           scrub: 0.35,
           anticipatePin: 0,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => updateState(self.progress),
+        });
+
+        return () => {
+          trigger.kill();
+        };
+      });
+
+      mm.add("(min-width: 1024px) and (max-height: 860px)", () => {
+        const trigger = createTimelineTrigger({
+          start: "top top+=120",
+          end: "bottom bottom-=48",
+          scrub: 0.28,
         });
 
         return () => {
@@ -97,7 +114,7 @@ const Timeline = ({ content }) => {
       <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:22px_22px]" />
       <div
         ref={pinRef}
-        className="relative flex min-h-screen items-center overflow-hidden px-5 py-24 sm:px-10 lg:py-32"
+        className="timeline-stage relative flex min-h-screen items-center overflow-hidden px-5 py-24 sm:px-10 lg:py-32"
       >
         <div className="mx-auto w-full max-w-[1440px]">
           <div className="lg:hidden">
@@ -234,7 +251,7 @@ const Timeline = ({ content }) => {
 
             <div ref={imageRef} className="relative flex items-center justify-center">
               <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(96,165,250,0.18),transparent_55%)] blur-3xl" />
-              <div className="relative flex min-h-[26rem] w-full items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,30,0.94),rgba(7,7,18,0.98))] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.35)] md:min-h-[34rem] md:p-6">
+              <div className="timeline-media-frame relative flex min-h-[26rem] w-full items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(14,14,30,0.94),rgba(7,7,18,0.98))] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.35)] md:min-h-[34rem] md:p-6">
                 <div className="absolute left-1/2 top-10 h-28 w-3/4 -translate-x-1/2 rounded-full bg-violet-300/15 blur-3xl" />
                 <img
                   src={active.image}
