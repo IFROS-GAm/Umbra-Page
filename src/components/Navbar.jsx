@@ -8,12 +8,6 @@ import Button from "./Button";
 import { languages } from "../content/siteContent";
 
 const isPageRouteHref = (href = "") => href.startsWith("/");
-const audioPlaylist = [
-  "Clair De Lune - Claude Debussy.mp3",
-  "Chopin Nocturne No. 20 in C-Sharp Minor, Op. Posth. (Rousseau Felt Piano Version) - Johannes Helmer Pedersen.mp3",
-  "Sonata Claro De Luna - Ludwig van Beethoven.mp3",
-].map((fileName) => encodeURI(`/audio/${fileName}`));
-
 const menuLabels = {
   es: {
     open: "Abrir navegacion",
@@ -36,8 +30,8 @@ const menuLabels = {
 };
 
 const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
-  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
-  const [activeTrackIndex, setActiveTrackIndex] = useState(0);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [isFloating, setIsFloating] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,86 +39,26 @@ const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
   const audioElementRef = useRef(null);
   const navContainerRef = useRef(null);
   const lastScrollYRef = useRef(0);
-  const autoplayCleanupRef = useRef(() => {});
 
   const { y: currentScrollY } = useWindowScroll();
 
   const toggleAudioIndicator = () => {
     setIsAudioPlaying((prev) => !prev);
+    setIsIndicatorActive((prev) => !prev);
   };
 
   useEffect(() => {
-    const audioElement = audioElementRef.current;
-    if (!audioElement) return undefined;
+    if (!audioElementRef.current) return;
 
-    audioElement.volume = 0.36;
-
-    const cleanupAutoplayListeners = () => {
-      autoplayCleanupRef.current();
-      autoplayCleanupRef.current = () => {};
-    };
-
-    if (!isAudioPlaying) {
-      cleanupAutoplayListeners();
-      audioElement.pause();
-      return cleanupAutoplayListeners;
-    }
-
-    let isDisposed = false;
-
-    const registerAutoplayFallback = () => {
-      cleanupAutoplayListeners();
-
-      const retryPlayback = async () => {
-        if (isDisposed || !audioElementRef.current) return;
-
-        try {
-          await audioElementRef.current.play();
-          cleanupAutoplayListeners();
-        } catch {
-          // Keep waiting for the next user interaction.
-        }
-      };
-
-      const listeners = ["pointerdown", "keydown", "touchstart"];
-      listeners.forEach((eventName) => {
-        window.addEventListener(eventName, retryPlayback, { passive: true });
+    if (isAudioPlaying) {
+      audioElementRef.current.play().catch(() => {
+        setIsAudioPlaying(false);
+        setIsIndicatorActive(false);
       });
-
-      autoplayCleanupRef.current = () => {
-        listeners.forEach((eventName) => {
-          window.removeEventListener(eventName, retryPlayback);
-        });
-      };
-    };
-
-    const syncPlayback = async () => {
-      try {
-        await audioElement.play();
-      } catch {
-        registerAutoplayFallback();
-      }
-    };
-
-    syncPlayback();
-
-    return () => {
-      isDisposed = true;
-      cleanupAutoplayListeners();
-    };
-  }, [activeTrackIndex, isAudioPlaying]);
-
-  useEffect(() => {
-    const audioElement = audioElementRef.current;
-    if (!audioElement) return undefined;
-
-    const handleTrackEnd = () => {
-      setActiveTrackIndex((prev) => (prev + 1) % audioPlaylist.length);
-    };
-
-    audioElement.addEventListener("ended", handleTrackEnd);
-    return () => audioElement.removeEventListener("ended", handleTrackEnd);
-  }, []);
+    } else {
+      audioElementRef.current.pause();
+    }
+  }, [isAudioPlaying]);
 
   useEffect(() => {
     const isAtTop = currentScrollY <= 8;
@@ -171,7 +105,6 @@ const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
   }, []);
 
   const audioLabel = isAudioPlaying ? content.audioPause : content.audioPlay;
-  const isIndicatorActive = isAudioPlaying;
   const navSurface = isFloating
     ? "floating-nav"
     : "border-white/10 bg-black/20 shadow-none supports-[backdrop-filter]:backdrop-blur-sm";
@@ -296,8 +229,8 @@ const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
                 <audio
                   ref={audioElementRef}
                   className="hidden"
-                  src={audioPlaylist[activeTrackIndex]}
-                  preload="auto"
+                  src="/audio/Clair%20De%20Lune%20-%20Claude%20Debussy.mp3"
+                  loop
                 />
                 {[1, 2, 3, 4].map((bar) => (
                   <div

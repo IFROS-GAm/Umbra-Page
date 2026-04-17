@@ -102,15 +102,11 @@ const utilityPageRouteMap = {
   "/contactanos": "contact",
 };
 
-const normalizePathname = (value = "/") => {
-  const normalizedPath = value.replace(/\/+$/, "");
-  return normalizedPath === "" ? "/" : normalizedPath;
-};
-
 const getCurrentPath = () => {
   if (typeof window === "undefined") return "/";
 
-  return normalizePathname(window.location.pathname);
+  const normalizedPath = window.location.pathname.replace(/\/+$/, "");
+  return normalizedPath === "" ? "/" : normalizedPath;
 };
 
 const replaceSpecialHref = (value) => {
@@ -241,53 +237,6 @@ const App = () => {
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return undefined;
-
-    const handleDocumentNavigation = (event) => {
-      if (
-        event.defaultPrevented ||
-        event.button !== 0 ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey
-      ) {
-        return;
-      }
-
-      if (!(event.target instanceof Element)) return;
-
-      const anchor = event.target.closest("a[href]");
-      if (!anchor) return;
-
-      const href = anchor.getAttribute("href");
-      const target = anchor.getAttribute("target");
-
-      if (!href || href.startsWith("#") || (target && target !== "_self")) return;
-      if (anchor.hasAttribute("download")) return;
-
-      const nextUrl = new URL(anchor.href, window.location.href);
-      if (nextUrl.origin !== window.location.origin) return;
-
-      const nextPath = normalizePathname(nextUrl.pathname);
-      if (!nextPath.startsWith("/")) return;
-
-      event.preventDefault();
-
-      const nextLocation = `${nextPath}${nextUrl.search}${nextUrl.hash}`;
-      const currentLocation = `${pathname}${window.location.search}${window.location.hash}`;
-
-      if (nextLocation === currentLocation) return;
-
-      window.history.pushState({}, "", nextLocation);
-      setPathname(nextPath);
-    };
-
-    document.addEventListener("click", handleDocumentNavigation);
-    return () => document.removeEventListener("click", handleDocumentNavigation);
-  }, [pathname]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
