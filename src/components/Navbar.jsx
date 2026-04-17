@@ -8,6 +8,12 @@ import Button from "./Button";
 import { languages } from "../content/siteContent";
 
 const isPageRouteHref = (href = "") => href.startsWith("/");
+const audioPlaylist = [
+  "Clair De Lune - Claude Debussy.mp3",
+  "Chopin Nocturne No. 20 in C-Sharp Minor, Op. Posth. (Rousseau Felt Piano Version) - Johannes Helmer Pedersen.mp3",
+  "Sonata Claro De Luna - Ludwig van Beethoven.mp3",
+].map((fileName) => encodeURI(`/audio/${fileName}`));
+
 const menuLabels = {
   es: {
     open: "Abrir navegacion",
@@ -30,8 +36,8 @@ const menuLabels = {
 };
 
 const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(true);
+  const [activeTrackIndex, setActiveTrackIndex] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [isFloating, setIsFloating] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,26 +45,86 @@ const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
   const audioElementRef = useRef(null);
   const navContainerRef = useRef(null);
   const lastScrollYRef = useRef(0);
+  const autoplayCleanupRef = useRef(() => {});
 
   const { y: currentScrollY } = useWindowScroll();
 
   const toggleAudioIndicator = () => {
     setIsAudioPlaying((prev) => !prev);
-    setIsIndicatorActive((prev) => !prev);
   };
 
   useEffect(() => {
-    if (!audioElementRef.current) return;
+    const audioElement = audioElementRef.current;
+    if (!audioElement) return undefined;
 
-    if (isAudioPlaying) {
-      audioElementRef.current.play().catch(() => {
-        setIsAudioPlaying(false);
-        setIsIndicatorActive(false);
-      });
-    } else {
-      audioElementRef.current.pause();
+    audioElement.volume = 0.36;
+
+    const cleanupAutoplayListeners = () => {
+      autoplayCleanupRef.current();
+      autoplayCleanupRef.current = () => {};
+    };
+
+    if (!isAudioPlaying) {
+      cleanupAutoplayListeners();
+      audioElement.pause();
+      return cleanupAutoplayListeners;
     }
-  }, [isAudioPlaying]);
+
+    let isDisposed = false;
+
+    const registerAutoplayFallback = () => {
+      cleanupAutoplayListeners();
+
+      const retryPlayback = async () => {
+        if (isDisposed || !audioElementRef.current) return;
+
+        try {
+          await audioElementRef.current.play();
+          cleanupAutoplayListeners();
+        } catch {
+          // Keep waiting for the next user interaction.
+        }
+      };
+
+      const listeners = ["pointerdown", "keydown", "touchstart"];
+      listeners.forEach((eventName) => {
+        window.addEventListener(eventName, retryPlayback, { passive: true });
+      });
+
+      autoplayCleanupRef.current = () => {
+        listeners.forEach((eventName) => {
+          window.removeEventListener(eventName, retryPlayback);
+        });
+      };
+    };
+
+    const syncPlayback = async () => {
+      try {
+        await audioElement.play();
+      } catch {
+        registerAutoplayFallback();
+      }
+    };
+
+    syncPlayback();
+
+    return () => {
+      isDisposed = true;
+      cleanupAutoplayListeners();
+    };
+  }, [activeTrackIndex, isAudioPlaying]);
+
+  useEffect(() => {
+    const audioElement = audioElementRef.current;
+    if (!audioElement) return undefined;
+
+    const handleTrackEnd = () => {
+      setActiveTrackIndex((prev) => (prev + 1) % audioPlaylist.length);
+    };
+
+    audioElement.addEventListener("ended", handleTrackEnd);
+    return () => audioElement.removeEventListener("ended", handleTrackEnd);
+  }, []);
 
   useEffect(() => {
     const isAtTop = currentScrollY <= 8;
@@ -105,6 +171,7 @@ const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
   }, []);
 
   const audioLabel = isAudioPlaying ? content.audioPause : content.audioPlay;
+  const isIndicatorActive = isAudioPlaying;
   const navSurface = isFloating
     ? "floating-nav"
     : "border-white/10 bg-black/20 shadow-none supports-[backdrop-filter]:backdrop-blur-sm";
@@ -229,8 +296,8 @@ const NavBar = ({ content, currentLanguage, onLanguageChange }) => {
                 <audio
                   ref={audioElementRef}
                   className="hidden"
-                  src="/audio/loop.mp3"
-                  loop
+                  src={audioPlaylist[activeTrackIndex]}
+                  preload="auto"
                 />
                 {[1, 2, 3, 4].map((bar) => (
                   <div
