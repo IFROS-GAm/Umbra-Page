@@ -149,11 +149,11 @@ body::-webkit-scrollbar-thumb:hover {
   }
 
   .about-subtext {
-    @apply absolute bottom-[-75dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem];
+    @apply relative z-30 mx-auto mt-16 w-full max-w-[52rem] px-5 text-center font-circular-web text-base leading-8 text-white/75 md:text-lg;
   }
 
   .about-image {
-    @apply absolute left-1/2 top-0 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw];
+    @apply absolute left-1/2 top-0 z-20 h-[58vh] w-[min(88vw,34rem)] origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[min(72vw,58rem)];
   }
 
   .animated-title {

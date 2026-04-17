@@ -45,12 +45,12 @@ const Timeline = ({ content }) => {
       mm.add("(min-width: 1024px)", () => {
         const trigger = ScrollTrigger.create({
           trigger: sectionRef.current,
-          start: "top top",
+          start: "top top+=140",
           end: () =>
             `+=${Math.max(window.innerHeight * (steps.length + 0.75), 2600)}`,
           pin: pinRef.current,
           scrub: 0.35,
-          anticipatePin: 1,
+          anticipatePin: 0,
           invalidateOnRefresh: true,
           onUpdate: (self) => updateState(self.progress),
         });
@@ -91,13 +91,13 @@ const Timeline = ({ content }) => {
     <section
       ref={sectionRef}
       id="timeline"
-      className="relative overflow-hidden bg-[#05050d]"
+      className="relative mt-20 overflow-hidden bg-[#05050d] lg:mt-24"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(168,85,247,0.12),transparent_24%),radial-gradient(circle_at_82%_20%,rgba(96,165,250,0.14),transparent_26%),linear-gradient(180deg,rgba(5,5,13,0.98),rgba(7,7,18,1))]" />
       <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:22px_22px]" />
       <div
         ref={pinRef}
-        className="relative flex min-h-screen items-center overflow-hidden px-5 py-20 sm:px-10"
+        className="relative flex min-h-screen items-center overflow-hidden px-5 py-24 sm:px-10 lg:py-32"
       >
         <div className="mx-auto w-full max-w-[1440px]">
           <div className="lg:hidden">
