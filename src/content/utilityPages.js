@@ -1,4 +1,5 @@
 const umbraWebAppUrl = "https://umbra-suaj.onrender.com/";
+const windowsInstallerUrl = "/Umbra-instalador/Instalador-Umbra-v0.2.0.exe";
 
 export const utilityPages = {
   es: {
@@ -36,7 +37,7 @@ export const utilityPages = {
             "Descarga la version de escritorio directamente aqui para entrar con una base mas solida, shell dedicado y auth real.",
           points: ["Electron shell", "Auth real", "Base privada"],
           ctaLabel: "Descargar para Windows",
-          href: "/Umbra-Setup.exe",
+          href: windowsInstallerUrl,
         },
         {
           eyebrow: "APK mobile",
@@ -541,7 +542,7 @@ export const utilityPages = {
             "Download the current Windows build directly from this page for a stronger entry point with a dedicated shell and real auth.",
           points: ["Electron shell", "Real auth", "Private-ready base"],
           ctaLabel: "Download for Windows",
-          href: "/Umbra-Setup.exe",
+          href: windowsInstallerUrl,
         },
         {
           eyebrow: "APK mobile",
@@ -801,7 +802,7 @@ export const utilityPages = {
             "Telecharge la version Windows actuelle directement ici pour une entree plus solide avec shell dedie et auth reelle.",
           points: ["Electron shell", "Auth reelle", "Base privee"],
           ctaLabel: "Telecharger pour Windows",
-          href: "/Umbra-Setup.exe",
+          href: windowsInstallerUrl,
         },
         {
           eyebrow: "APK mobile",

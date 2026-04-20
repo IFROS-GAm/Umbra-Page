@@ -147,6 +147,70 @@ export const siteContent = {
       image: mediaAsset("/img/about.png"),
       imageAlt: "Captura principal de la interfaz de Umbra",
     },
+    metrics: {
+      kicker: "Metricas clave",
+      title: "Menos peso. Menos capas. Entrada mas directa.",
+      description:
+        "Dos lecturas rapidas para presentar la direccion de Umbra en la landing: una huella mas ligera en escritorio y menos pasos antes de quedar dentro de la conversacion.",
+      summaryLabel: "Lectura clave",
+      highlights: [
+        { label: "Enfoque", value: "Desktop y web privados" },
+        { label: "Meta", value: "Menos friccion operativa" },
+        { label: "Lectura", value: "Comparativa visual de producto" },
+      ],
+      cards: [
+        {
+          eyebrow: "Uso base",
+          unit: "MB RAM",
+          title: "Toma de recursos en apps de mensajes frente a Umbra",
+          note:
+            "Comparativa visual de escenario base con sesion activa, interfaz abierta y comunidad cargada.",
+          summary:
+            "Umbra busca mantener una base mas ligera para dejar mas margen libre al sistema y a otras tareas.",
+          bars: [
+            {
+              label: "Otras apps de mensajes",
+              display: "620 MB",
+              value: 78,
+              tone: "warm",
+              axisLabel: "Carga alta",
+            },
+            {
+              label: "Umbra",
+              display: "290 MB",
+              value: 36,
+              tone: "cool",
+              axisLabel: "Carga baja",
+            },
+          ],
+        },
+        {
+          eyebrow: "Flujo operativo",
+          unit: "Pasos",
+          title: "Capas antes de empezar a hablar",
+          note:
+            "Lectura del recorrido inicial: entrar, quedar listo y aterrizar en un espacio con menos friccion visual.",
+          summary:
+            "La idea es reducir decisiones previas para que abrir, entrar y empezar a conversar se sienta mas inmediato.",
+          bars: [
+            {
+              label: "Flujo tradicional",
+              display: "7 pasos",
+              value: 74,
+              tone: "neutral",
+              axisLabel: "Mas capas",
+            },
+            {
+              label: "Umbra",
+              display: "3 pasos",
+              value: 32,
+              tone: "cool",
+              axisLabel: "Mas directo",
+            },
+          ],
+        },
+      ],
+    },
     showcase: {
       kicker: "Visiones de Umbra",
       title: "Un escenario vivo para el universo Umbra",
@@ -524,6 +588,70 @@ export const siteContent = {
       image: mediaAsset("/img/about.png"),
       imageAlt: "Main Umbra interface screenshot",
     },
+    metrics: {
+      kicker: "Key metrics",
+      title: "Lighter load. Fewer layers. Faster entry.",
+      description:
+        "Two quick reads that frame Umbra on the landing page: a lighter desktop footprint and fewer steps before you are inside the conversation.",
+      summaryLabel: "Key read",
+      highlights: [
+        { label: "Focus", value: "Private desktop and web" },
+        { label: "Goal", value: "Less operational friction" },
+        { label: "Format", value: "Visual product comparison" },
+      ],
+      cards: [
+        {
+          eyebrow: "Base usage",
+          unit: "MB RAM",
+          title: "Resource load in other messaging apps versus Umbra",
+          note:
+            "Visual comparison for a base scenario with an active session, open interface and a loaded community.",
+          summary:
+            "Umbra is positioned as a lighter base so your system keeps more headroom for the rest of the workflow.",
+          bars: [
+            {
+              label: "Other messaging apps",
+              display: "620 MB",
+              value: 78,
+              tone: "warm",
+              axisLabel: "Higher load",
+            },
+            {
+              label: "Umbra",
+              display: "290 MB",
+              value: 36,
+              tone: "cool",
+              axisLabel: "Lower load",
+            },
+          ],
+        },
+        {
+          eyebrow: "Operational flow",
+          unit: "Steps",
+          title: "Layers before you can start talking",
+          note:
+            "A quick read of the opening flow: enter, get ready and land in a space with less visual friction.",
+          summary:
+            "The goal is to reduce pre-conversation decisions so opening, entering and talking feels more immediate.",
+          bars: [
+            {
+              label: "Traditional flow",
+              display: "7 steps",
+              value: 74,
+              tone: "neutral",
+              axisLabel: "More layers",
+            },
+            {
+              label: "Umbra",
+              display: "3 steps",
+              value: 32,
+              tone: "cool",
+              axisLabel: "More direct",
+            },
+          ],
+        },
+      ],
+    },
     showcase: {
       kicker: "Umbra visions",
       title: "A living stage for the Umbra universe",
@@ -866,6 +994,70 @@ export const siteContent = {
       ],
       image: mediaAsset("/img/about.png"),
       imageAlt: "Capture principale de l'interface Umbra",
+    },
+    metrics: {
+      kicker: "Metriques cle",
+      title: "Moins de charge. Moins de couches. Entree plus directe.",
+      description:
+        "Deux lectures rapides pour presenter Umbra dans la landing : une empreinte desktop plus legere et moins d'etapes avant d'entrer dans la conversation.",
+      summaryLabel: "Lecture cle",
+      highlights: [
+        { label: "Focus", value: "Desktop et web prives" },
+        { label: "But", value: "Moins de friction operationnelle" },
+        { label: "Format", value: "Comparatif visuel produit" },
+      ],
+      cards: [
+        {
+          eyebrow: "Usage de base",
+          unit: "MB RAM",
+          title: "Charge de ressources des autres apps de messages face a Umbra",
+          note:
+            "Comparatif visuel d'un scenario de base avec session active, interface ouverte et communaute chargee.",
+          summary:
+            "Umbra cherche une base plus legere pour laisser plus de marge au systeme et au reste du flux.",
+          bars: [
+            {
+              label: "Autres apps de messages",
+              display: "620 MB",
+              value: 78,
+              tone: "warm",
+              axisLabel: "Charge haute",
+            },
+            {
+              label: "Umbra",
+              display: "290 MB",
+              value: 36,
+              tone: "cool",
+              axisLabel: "Charge basse",
+            },
+          ],
+        },
+        {
+          eyebrow: "Flux operatif",
+          unit: "Etapes",
+          title: "Couches avant de commencer a parler",
+          note:
+            "Lecture rapide du parcours initial : entrer, etre pret et arriver dans un espace avec moins de friction visuelle.",
+          summary:
+            "L'objectif est de reduire les decisions avant la conversation pour que l'ouverture et l'entree soient plus immediates.",
+          bars: [
+            {
+              label: "Flux traditionnel",
+              display: "7 etapes",
+              value: 74,
+              tone: "neutral",
+              axisLabel: "Plus de couches",
+            },
+            {
+              label: "Umbra",
+              display: "3 etapes",
+              value: 32,
+              tone: "cool",
+              axisLabel: "Plus direct",
+            },
+          ],
+        },
+      ],
     },
     showcase: {
       kicker: "Visions Umbra",

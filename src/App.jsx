@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import NavBar from "./components/Navbar";
 import OverviewNavigator from "./components/OverviewNavigator";
 import About from "./components/About";
+import MetricsSection from "./components/MetricsSection";
 import HeroShowcase from "./components/HeroShowcase";
 import FunctionalitySections from "./components/FunctionalitySections";
 import UiUx from "./components/UiUx";
@@ -342,6 +343,7 @@ const App = () => {
       />
       <Hero content={landingHeroContent} />
       <About content={content.about} />
+      <MetricsSection content={content.metrics} />
       <SectionTransition tone="sky" align="left" />
       <OverviewNavigator content={landingOverviewContent} />
       <SectionTransition tone="violet" align="right" />
