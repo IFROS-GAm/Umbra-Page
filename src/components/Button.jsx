@@ -1,18 +1,5 @@
 import clsx from "clsx";
 
-const pageChipLabelByLocale = {
-  es: "PAGINA",
-  en: "PAGE",
-  fr: "PAGE",
-};
-
-const isInternalPageHref = (href) => {
-  if (typeof href !== "string") return false;
-
-  const normalizedHref = href.split(/[?#]/)[0];
-  return /^\/(?!\/)/.test(href) && !/\.[a-z0-9]+$/i.test(normalizedHref);
-};
-
 const Button = ({
   id,
   title,
@@ -25,13 +12,8 @@ const Button = ({
   onClick,
   type = "button",
 }) => {
-  const isPageRoute = isInternalPageHref(href);
-  const locale =
-    typeof document !== "undefined" ? document.documentElement.lang || "es" : "es";
-  const pageChipLabel = pageChipLabelByLocale[locale] ?? pageChipLabelByLocale.es;
   const className = clsx(
     "group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full bg-[#dfdff2] px-7 py-3 text-black",
-    isPageRoute && "page-route-button",
     containerClass
   );
 
@@ -47,8 +29,6 @@ const Button = ({
           {title}
         </div>
       </span>
-
-      {isPageRoute && <span className="page-route-pill">{pageChipLabel}</span>}
 
       {rightIcon}
     </>

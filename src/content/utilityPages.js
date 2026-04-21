@@ -1,5 +1,5 @@
 const umbraWebAppUrl = "https://umbra-suaj.onrender.com/";
-const windowsInstallerUrl = "/Umbra-instalador/Instalador-Umbra-v0.2.0.exe";
+const windowsInstallerUrl = "/Umbra-instalador/Instalador-Umbra-v0.2.2.exe";
 
 export const utilityPages = {
   es: {

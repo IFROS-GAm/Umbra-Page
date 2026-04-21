@@ -10,7 +10,6 @@ const featuresPageIntroByLocale = {
     note:
       "Una vista separada para leer servidores, canales, DMs y builds sin mezclarlo con el resto del recorrido.",
     backLabel: "Volver al inicio",
-    homeChipLabel: "INICIO",
   },
   en: {
     kicker: "Separate page",
@@ -20,7 +19,6 @@ const featuresPageIntroByLocale = {
     note:
       "A separate view to read servers, channels, DMs and builds without mixing everything into the main journey.",
     backLabel: "Back to home",
-    homeChipLabel: "HOME",
   },
   fr: {
     kicker: "Page separee",
@@ -30,7 +28,6 @@ const featuresPageIntroByLocale = {
     note:
       "Une vue separee pour lire serveurs, canaux, DMs et builds sans melanger tout le parcours principal.",
     backLabel: "Retour a l'accueil",
-    homeChipLabel: "ACCUEIL",
   },
 };
 
@@ -63,9 +60,8 @@ const FeaturesPage = ({ content, footerContent, currentLanguage, onLanguageChang
             <div className="mt-8">
               <a
                 href="/"
-                className="page-switch-link"
+                className="inline-flex rounded-full border border-white/10 bg-white/[0.05] px-5 py-3 font-general text-[11px] uppercase tracking-[0.18em] text-[#efedff] transition hover:border-violet-300/30 hover:bg-white/[0.08]"
               >
-                <span className="page-link-chip">{intro.homeChipLabel}</span>
                 {intro.backLabel}
               </a>
             </div>
